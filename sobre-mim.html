@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Sobre Mim — Ruptura Milionária</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@300;400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css?v=3" />
+<style>
+  /* Bloqueia scroll horizontal (mobile / desktop) */
+  html, body { overflow-x: hidden; max-width: 100%; }
+  body {
+    overscroll-behavior-x: none;
+    position: relative; /* fix iOS Safari: overflow-x:hidden + scroll vertical preso */
+  }
+
+  /* Page-specific overrides for the Sobre Mim story */
+  .story-hero { padding-top: 140px; padding-bottom: 30px; }
+  .story-hero .container { max-width: 920px; }
+  .story-hero h1 {
+    font-size: clamp(40px, 5.6vw, 76px);
+    line-height: 0.98;
+  }
+  .story-hero .h-purple { color: var(--purple-soft); }
+
+  .story-body {
+    display: grid; grid-template-columns: minmax(280px, 360px) 1fr;
+    gap: 56px; align-items: start;
+    width: min(1080px, 100%); margin: 0 auto; padding: 0 22px;
+  }
+  .story-body .about-photo {
+    position: sticky; top: 110px;
+  }
+  .story-body article p {
+    color: var(--ink-dim); font-size: 17px; margin: 0 0 18px; max-width: 64ch;
+    line-height: 1.65;
+  }
+  .story-body article strong { color: #fff; font-weight: 600; }
+  .story-body article .highlight {
+    margin: 24px 0 26px;
+    padding: 22px 24px;
+    background: linear-gradient(180deg, rgba(170,124,17,0.10), rgba(255,255,255,0.01));
+    border: 1px solid rgba(243,208,120,0.30);
+    border-left: 3px solid var(--purple-soft);
+    border-radius: 14px;
+    font-size: 18px; color: #fff;
+  }
+
+  .story-cta {
+    margin-top: 56px; padding: 56px 48px;
+    border-radius: 28px;
+    background:
+      radial-gradient(60% 80% at 100% 0%, rgba(170,124,17,0.20), transparent 60%),
+      linear-gradient(180deg, #0a0a0e, #000000);
+    border: 1px solid rgba(243,208,120,0.30);
+    text-align: center;
+  }
+  .story-cta h2 { margin-bottom: 14px; }
+  .story-cta p { color: var(--ink-dim); max-width: 56ch; margin: 0 auto 28px; }
+
+  .back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--ink-dim); text-decoration: none; font-size: 13px;
+    padding: 8px 14px; border-radius: 999px;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--line-bright);
+    margin-bottom: 18px;
+  }
+  .back-link:hover { color: #fff; border-color: var(--purple-soft); }
+  .back-link svg { width: 14px; height: 14px; }
+
+  @media (max-width: 960px) {
+    .story-body { grid-template-columns: 1fr; gap: 28px; }
+    .story-body .about-photo { position: relative; top: 0; max-width: 320px; margin: 0 auto; }
+    .story-cta { padding: 36px 24px; }
+  }
+</style>
+
+<!-- UTMify — Pixel de conversão -->
+<script>
+  window.pixelId = "6a11900ef835c52ef16b7667";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+<!-- UTMify — Captura de UTMs -->
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+</head>
+<body>
+  <div class="bg-stage" aria-hidden="true"></div>
+
+  <!-- ============== NAV ============== -->
+  <div class="nav-wrap">
+    <nav class="nav glass glass-edge" aria-label="Navegação principal">
+      <a href="index.html" class="nav-brand" aria-label="Ruptura Milionária">
+        <img src="assets/logo.png?v=2" alt="Ruptura Milionária" />
+      </a>
+      <a href="index.html" class="nav-title" aria-label="Ruptura Milionária">
+        <span class="wm"><span class="wm-top">RUPTURA</span><span class="wm-bot">MILIONÁRIA</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#sobre-curso">O Curso</a>
+        <a href="index.html#modulos">Módulos</a>
+        <a href="sobre-mim.html" style="color:#fff;">Sobre Mim</a>
+        <a href="index.html#depoimentos">Depoimentos</a>
+        <a href="index.html#faq">FAQ</a>
+      </div>
+      <a href="pagamento.html?v=2" class="nav-cta">
+        Garantir Vaga
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+      </a>
+      <button class="nav-burger" id="burger" aria-label="Abrir menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </nav>
+  </div>
+  <div class="mobile-sheet glass glass-edge" id="mobileSheet">
+    <a href="index.html#sobre-curso">O Curso</a>
+    <a href="index.html#modulos">Módulos</a>
+    <a href="sobre-mim.html">Sobre Mim</a>
+    <a href="index.html#depoimentos">Depoimentos</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="pagamento.html?v=2" class="nav-cta">Garantir Vaga →</a>
+  </div>
+
+  <main id="top">
+    <!-- ============== STORY HERO ============== -->
+    <section class="story-hero">
+      <div class="container">
+        <a href="index.html" class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+          Voltar ao início
+        </a>
+        <span class="eyebrow"><span class="dot"></span>Sobre Mim</span>
+        <h1 style="margin-top: 20px;">
+          Abri a minha <span class="h-purple">primeira empresa</span><br/>
+          aos 20 anos. Faturei mais de<br/>
+          13 milhões este ano. Vivo 100%<br/>
+          da internet.
+        </h1>
+
+        <!-- Stats -->
+        <div class="stats-row" style="margin-top: 56px;">
+          <div class="stat">
+            <div class="stat-n">100%</div>
+            <div class="stat-l">A viver exclusivamente do mercado digital</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">20<span>anos</span></div>
+            <div class="stat-l">Idade ao abrir a primeira empresa</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">13M+</div>
+            <div class="stat-l">Kwanzas faturados em produtos este ano</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">2024</div>
+            <div class="stat-l">Ano de início no mercado digital</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">0</div>
+            <div class="stat-l">Trabalho de carteira assinada na vida</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== STORY BODY ============== -->
+    <section style="padding: 30px 0 80px;">
+      <div class="story-body">
+        <div class="about-photo">
+          <img src="assets/stelvio.webp?v=2" alt="Stélvio Aspirant" />
+        </div>
+        <article>
+          <p>O meu nome é <strong>Stélvio Aspirant</strong>.</p>
+
+          <p>A minha história no mercado digital começou em <strong>2024</strong>, quando despertei uma enorme curiosidade por marketing digital e vendas online. No início, eu não sabia exatamente o caminho, mas decidi estudar, testar e colocar tudo em prática.</p>
+
+          <p>Em vez de apenas consumir conteúdo, comecei a <strong>validar ofertas tanto no orgânico como no tráfego pago</strong>, entendendo o que realmente funciona no mercado. Foi esse processo de testes, erros e otimizações que me permitiu construir um negócio sólido na internet.</p>
+
+          <p>Hoje vivo <strong>100% do mercado digital desde fevereiro deste ano</strong>. Graças às vendas online consegui abrir a minha primeira empresa aos 20 anos, uma conquista que antes parecia muito distante da minha realidade.</p>
+
+          <p>Só este ano, os produtos e estratégias que desenvolvi já ultrapassaram a marca de <strong>13 milhões de kwanzas faturados</strong>, resultado de um sistema validado na prática e construído para funcionar no nosso mercado.</p>
+
+          <p>Mas não te conto isto para impressionar.</p>
+
+          <p>Conto porque sei exatamente como é estar do outro lado: procurar uma oportunidade, consumir informação sem saber em quem confiar e sentir que quase tudo o que existe foi criado para realidades completamente diferentes da nossa.</p>
+
+          <p>Foi exatamente por isso que decidi criar a <strong>RUPTURA MILIONÁRIA</strong>.</p>
+
+          <p>Este não é apenas mais um curso. É o resultado de tudo o que aprendi desde que entrei no mercado digital em 2024, das estratégias que validei no orgânico e no tráfego pago, dos erros que cometi e das soluções que encontrei para transformar conhecimento em faturamento real.</p>
+
+          <p>O objetivo é encurtar o teu caminho. Em vez de passares meses ou anos a tentar descobrir sozinho o que funciona, vais aprender um método pensado para a nossa realidade, para que possas construir o teu próprio negócio digital de forma muito mais rápida, estratégica e consistente.</p>
+
+          <!-- Final CTA -->
+          <div class="story-cta">
+            <span class="eyebrow"><span class="dot"></span>O próximo passo é teu</span>
+            <h2 style="margin-top: 18px;">Garante a tua vaga<br/>na turma 2026.</h2>
+            <p>Por menos de 10 mil Kz, tu tens acesso vitalício ao método completo, à comunidade VIP e a todas as atualizações futuras. Garantia incondicional de 7 dias.</p>
+            <a href="pagamento.html?v=2" class="btn-primary">
+              Garantir a minha vaga
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============== FOOTER ============== -->
+  <footer>
+    <div class="foot glass glass-edge">
+      <div class="foot-brand">
+        <img src="assets/logo.png?v=2" alt="Ruptura Milionária" />
+        <div class="wm"><span class="wm-top">RUPTURA</span><span class="wm-bot">MILIONÁRIA</span></div>
+        <p>O método pra ganhar dinheiro com a internet em Angola — do produto ao Multicaixa Express.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html#sobre-curso">O Curso</a></li>
+          <li><a href="index.html#modulos">Módulos</a></li>
+          <li><a href="sobre-mim.html">Sobre Mim</a></li>
+          <li><a href="index.html#depoimentos">Depoimentos</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Suporte</h4>
+        <ul>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="mailto:contato@rupturamilionaria.com">contato@rupturamilionaria.com</a></li>
+          <li><a href="#">Termos de uso</a></li>
+          <li><a href="#">Política de privacidade</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Acompanhe</h4>
+        <ul>
+          <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="#" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Ruptura Milionária. Todos os direitos reservados.</div>
+      <div>Luanda, Angola • Resultados variam conforme dedicação e mercado.</div>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const sheet = document.getElementById('mobileSheet');
+    burger.addEventListener('click', () => sheet.classList.toggle('open'));
+    sheet.querySelectorAll('a').forEach(a => a.addEventListener('click', () => sheet.classList.remove('open')));
+  </script>
+</body>
+</html>

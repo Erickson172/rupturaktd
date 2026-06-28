@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Pagamento — Ruptura Milionária</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@300;400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css?v=3" />
+
+<!-- UTMify — Pixel de conversão -->
+<script>
+  window.pixelId = "6a11900ef835c52ef16b7667";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+<!-- UTMify — Captura de UTMs -->
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+<style>
+  html { background: #000 !important; }
+  html, body { overflow-x: hidden; max-width: 100%; }
+  body {
+    overscroll-behavior-x: none;
+    position: relative;
+    background: #000 !important;
+    min-height: 100svh;
+  }
+  /* Fundo unico em toda a pagina — elimina a "barra preta" entre topo e base.
+     O .bg-stage era fixed (so cobria o viewport); absolute cobre o doc inteiro. */
+  .bg-stage { position: absolute !important; min-height: 100svh; }
+
+  #paymentVsl, #paymentVsl iframe { touch-action: pan-y; }
+
+  /* Subheadline escondida (foco total no video + botao) */
+  .hero-sub { display: none !important; }
+
+  /* Layout que cabe sempre no ecra: video o maior possivel, mas o botao
+     "Pagar agora" NUNCA sai do viewport e fica sempre ACIMA das notificacoes. */
+  .hero {
+    box-sizing: border-box;
+    padding-top: 22px !important;
+    padding-bottom: 92px !important;   /* reserva p/ a zona das notificacoes */
+  }
+  .vsl-wrap {
+    display: flex; justify-content: center;
+    margin: 14px 0 !important; padding: 0 !important; max-width: none !important;
+  }
+  /* Altura do video limitada pela altura do ecra (svh) -> responsivo e o botao
+     continua visivel. O termo 94vw*584/270 protege telas muito estreitas. */
+  #paymentVsl {
+    aspect-ratio: 270 / 584;
+    height: min(calc(100svh - 236px), 76vh, calc(94vw * 584 / 270)) !important;
+    width: auto !important; max-width: 94vw !important; margin: 0 auto !important;
+  }
+  @media (max-width: 720px) {
+    .hero { padding-top: 16px !important; padding-bottom: 86px !important; }
+    .eyebrow { font-size: 10px !important; padding: 6px 12px !important; }
+    .vsl-wrap { margin: 10px 0 !important; }
+    .pay-cta-row { margin-top: 14px !important; }
+  }
+
+  /* CTA principal pagamento — destaque máximo, logo abaixo do vídeo */
+  .pay-cta-row {
+    margin-top: 28px; display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .pay-cta-row .btn-primary {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    width: 100%;
+    max-width: 380px;
+    justify-content: center;
+    font-size: 19px;
+    padding: 20px 26px;
+    letter-spacing: 0.09em;
+    animation: ctaPulse 1.8s ease-in-out infinite, ctaGlow 2.4s ease-in-out infinite;
+    will-change: transform, box-shadow;
+  }
+  .pay-cta-row .btn-primary svg { width: 19px; height: 19px; }
+  @media (max-width: 720px) {
+    .pay-cta-row .btn-primary { font-size: 17px; padding: 18px 20px; letter-spacing: 0.08em; max-width: 320px; }
+    .pay-cta-row .btn-primary svg { width: 17px; height: 17px; }
+  }
+  .pay-cta-row .btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -60%;
+    width: 50%; height: 100%;
+    background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.45) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    animation: ctaShimmer 2.6s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pay-cta-row .btn-primary > * { position: relative; z-index: 2; }
+  @keyframes ctaPulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.045); }
+  }
+  @keyframes ctaGlow {
+    0%, 100% {
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.40),
+        inset 0 -2px 0 rgba(0,0,0,0.25),
+        0 20px 50px rgba(170,124,17,0.55),
+        0 0 0 0 rgba(243,208,120,0.55);
+    }
+    70% {
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.40),
+        inset 0 -2px 0 rgba(0,0,0,0.25),
+        0 22px 56px rgba(170,124,17,0.70),
+        0 0 0 18px rgba(243,208,120,0);
+    }
+  }
+  @keyframes ctaShimmer {
+    0%   { left: -60%; }
+    60%  { left: 120%; }
+    100% { left: 120%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pay-cta-row .btn-primary,
+    .pay-cta-row .btn-primary::before { animation: none !important; }
+  }
+
+  /* Delay de 3 min no botao de pagar — mensagem + contagem no lugar do botao */
+  body.pay-waiting #payNow { display: none !important; }
+  body:not(.pay-waiting) #payWait { display: none !important; }
+  body.pay-waiting #paymentVsl {
+    height: min(calc(100svh - 300px), 66vh, calc(94vw * 584 / 270)) !important;
+  }
+  .pay-wait {
+    width: 100%; max-width: 380px; text-align: center;
+    padding: 16px 20px; border-radius: 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px dashed rgba(243,208,120,0.45);
+  }
+  .pay-wait .pw-msg { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.4; }
+  .pay-wait .pw-msg b { color: var(--purple-soft); font-variant-numeric: tabular-nums; }
+  .pay-wait .pw-sub { color: var(--ink-dim); font-size: 13px; margin-top: 5px; }
+  @media (max-width: 720px) {
+    .pay-wait { max-width: 320px; padding: 14px 16px; }
+    .pay-wait .pw-msg { font-size: 14px; }
+    .pay-wait .pw-sub { font-size: 12px; }
+  }
+
+  /* Notificacoes de compra (prova social) */
+  .buy-toast {
+    position: fixed; left: 14px; bottom: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 12px;
+    max-width: 290px; padding: 11px 16px 11px 11px;
+    background: rgba(20,16,28,0.92);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border: 1px solid rgba(243,208,120,0.30); border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+    transform: translateX(-130%); opacity: 0;
+    transition: transform .45s cubic-bezier(.2,.8,.2,1), opacity .45s ease;
+    pointer-events: none;
+  }
+  .buy-toast.show { transform: translateX(0); opacity: 1; }
+  .buy-toast .avatar {
+    width: 40px; height: 40px; border-radius: 50%; flex: 0 0 40px;
+    display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 14px;
+    background: linear-gradient(135deg,#F3D078,#A67C1E);
+  }
+  .buy-toast .bt-body { text-align: left; line-height: 1.3; }
+  .buy-toast .bt-name { color: #fff; font-weight: 700; font-size: 14px; }
+  .buy-toast .bt-sub { color: var(--ink-dim); font-size: 11.5px; margin-top: 1px; }
+  .buy-toast .bt-sub b { color: #4ade80; font-weight: 600; }
+  @media (max-width: 720px) {
+    .buy-toast { left: 10px; bottom: 12px; max-width: 78vw; }
+  }
+</style>
+</head>
+<body>
+  <div class="bg-stage" aria-hidden="true"></div>
+
+  <main id="top">
+
+    <!-- ============== HERO ============== -->
+    <section class="hero" style="padding-top: 40px;">
+      <div class="container">
+        <div class="hero-inner">
+          <span class="eyebrow"><span class="dot"></span>Assista o vídeo para saber como garantir a sua vaga</span>
+          <p class="hero-sub" style="margin-top:18px;">
+            O vídeo abaixo mostra exactamente como fazer o pagamento de <b>8.900 Kz</b> via Multicaixa Express e como vais receber o acesso à Ruptura Milionária.
+          </p>
+
+          <!-- VSL do pagamento -->
+          <div class="vsl-wrap">
+            <div id="paymentVsl" aria-label="Vídeo tutorial de pagamento"
+                 style="position:relative; aspect-ratio: 270 / 584; border-radius:18px; overflow:hidden;
+                        max-width:260px; margin:0 auto;
+                        border:1px solid rgba(255,255,255,0.10);
+                        box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 30px 80px rgba(0,0,0,0.50);">
+              <iframe id="panda-db9eaeb6-2fcf-4a0a-96a8-ba0e21819442"
+                      src="https://player-vz-d90b4fa6-c2e.tv.pandavideo.com.br/embed/?v=db9eaeb6-2fcf-4a0a-96a8-ba0e21819442"
+                      style="border:none; position:absolute; top:0; left:0;"
+                      allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture"
+                      allowfullscreen=true
+                      width="100%" height="100%"
+                      fetchpriority="high"></iframe>
+            </div>
+          </div>
+
+          <!-- CTA principal (logo abaixo do vídeo, destaque máximo) -->
+          <div class="pay-cta-row">
+            <div class="pay-wait" id="payWait" aria-live="polite">
+              <div class="pw-msg">Vais poder ter o teu acesso em <b id="payCount">3:00</b></div>
+              <div class="pw-sub">Termina de ver o vídeo 👆</div>
+            </div>
+            <a href="https://www.kintu.org/product/697c88c4-7226-4bf3-950d-903c8022352a" id="payNow" class="btn-primary" rel="noopener">
+              Pagar agora — 8.900 Kz
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Notificacoes de compra — nomes angolanos aleatorios (prova social)
+    (function purchaseToasts() {
+      const FIRST = ['João','José','Manuel','António','Pedro','Carlos','Domingos','Francisco','Adão','Mateus','Paulo','Eduardo','Fernando','Gabriel','Hélder','Job','Luís','Mário','Nelson','Osvaldo','Rafael','Sérgio','Tiago','Wilson','Bento','Bruno','César','Edson','Gerson','Horácio','Inácio','Jorge','Lázaro','Miguel','Nuno','Octávio','Quim','Valter','Afonso','Belarmino','Celestino','Délcio','Evaristo','Filipe','Geraldo','Isaías','Joaquim','Kiluanje','Lourenço','Marcelino','Nicolau','Lukeny','Cândido','Augusto','Baptista','Salvador','Simão','Garcia','Adérito','Domingos',
+        'Maria','Ana','Joana','Esperança','Domingas','Teresa','Luzia','Catarina','Beatriz','Cláudia','Deolinda','Eunice','Fátima','Helena','Isabel','Joelma','Lúcia','Madalena','Natália','Olga','Paula','Rosa','Sónia','Tânia','Vitória','Wanda','Yara','Zaida','Albertina','Celma','Elisa','Florinda','Gisela','Ngueve','Kiesse','Tchissola','Engrácia','Hortência','Lurdes','Benvinda'];
+      const LAST = ['dos Santos','Fernandes','da Silva','Domingos','Cassule','Kiala','Mbala','Tchikuteno','Mukendi','Nzinga','Kambango','Lutonadio','Pereira','Gonçalves','Ferreira','Sebastião','Quitongo','Cahala','Sangueve','Catata','Mbanza','Ndombele','Kapaia','Chissingui','Mussunda','Capita','Bumba','Kiluange','Ngola','Calunga','Sumbula','Tchitombi','Wambu','Yamba','Zinga','Bengui','Calandula','Manuel','António','José','Baptista','Sapalo','Cabral','Neto','Vieira','Kassoma','Mavinga','Quissanga','Nascimento','Lopes','Pinto','Sousa','Mbumba','Dala','Capemba'];
+      const CITY = ['Luanda','Benguela','Huambo','Lubango','Cabinda','Malanje','Namibe','Soyo','Lobito','Uíge','Saurimo','Menongue','Sumbe','Caxito','Ndalatando','Kuito'];
+      const TIME = ['agora mesmo','há 1 min','há 2 min','há 3 min','há 4 min','há 6 min','há 7 min','há 9 min','há 12 min','há 15 min','há 18 min','há 22 min','há 27 min'];
+
+      const pick = a => a[Math.floor(Math.random() * a.length)];
+
+      const el = document.createElement('div');
+      el.className = 'buy-toast';
+      el.setAttribute('aria-hidden', 'true');
+      el.innerHTML = '<div class="avatar"></div><div class="bt-body"><div class="bt-name"></div><div class="bt-sub"></div></div>';
+      document.body.appendChild(el);
+
+      let last = '';
+      function show() {
+        let name;
+        do { name = pick(FIRST) + ' ' + pick(LAST); } while (name === last);
+        last = name;
+        const initials = name.split(' ').filter(Boolean).map(w => w[0]).join('').slice(0,2).toUpperCase();
+        el.querySelector('.avatar').textContent = initials;
+        el.querySelector('.bt-name').textContent = name;
+        el.querySelector('.bt-sub').innerHTML = '<b>acabou de comprar</b> · ' + pick(TIME);
+        el.classList.add('show');
+        setTimeout(() => el.classList.remove('show'), 5000);
+        setTimeout(show, nextDelay()); // intervalo organico (ver nextDelay)
+      }
+      function nextDelay() {
+        // Imita vendas reais: maioria espacada, com rajadas ocasionais.
+        const r = Math.random();
+        if (r < 0.15) return 9000  + Math.random() * 700;   // rajada 9-16s (raro)
+        if (r < 0.70) return 22000 + Math.random() * 20000;  // normal 22-42s
+        return 45000 + Math.random() * 30000;                // lento 45-75s
+      }
+      setTimeout(show, 7000 + Math.random() * 4000); // 1a notificacao 7-11s
+    })();
+  </script>
+
+  <script>
+    // Panda Video API — controlo nativo do player (pause/play)
+    window.pandaplayers = window.pandaplayers || {};
+    window.pandascriptLoaded = function () {
+      document.querySelectorAll('iframe[id^="panda-"]').forEach(iframe => {
+        try { window.pandaplayers[iframe.id] = new PandaPlayer(iframe.id); } catch (e) {}
+      });
+    };
+  </script>
+  <script async src="https://player.pandavideo.com.br/api.v2.js" onload="pandascriptLoaded()"></script>
+
+  <script>
+    // Pausa/Retoma vídeo Panda conforme visibilidade da tab
+    (function visibilityVideoControl() {
+      function eachPlayer(fn) {
+        Object.values(window.pandaplayers || {}).forEach(p => { try { fn(p); } catch (e) {} });
+      }
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) eachPlayer(p => p.pause && p.pause());
+        else eachPlayer(p => p.play && p.play());
+      });
+      window.addEventListener('pagehide', () => eachPlayer(p => p.pause && p.pause()));
+      window.addEventListener('blur',     () => eachPlayer(p => p.pause && p.pause()));
+      window.addEventListener('focus',    () => { if (!document.hidden) eachPlayer(p => p.play && p.play()); });
+    })();
+  </script>
+</body>
+</html>
